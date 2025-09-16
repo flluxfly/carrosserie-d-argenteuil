@@ -65,10 +65,18 @@ async function main() {
     recursive: true,
   });
 
+  const isFast =
+    process.env.FAST_MANIFEST === "1" ||
+    process.env.CF_PAGES === "1" ||
+    !!process.env.CF_PAGES_URL ||
+    process.env.CI === "true";
+
   const ffmpegCmd = ffmpegPath || "ffmpeg";
-  const ffmpegAvailable = await new Promise((resolve) => {
-    execFile(ffmpegCmd, ["-version"], (err) => resolve(!err));
-  });
+  const ffmpegAvailable = isFast
+    ? false
+    : await new Promise((resolve) => {
+        execFile(ffmpegCmd, ["-version"], (err) => resolve(!err));
+      });
 
   const optimizedDir = path.join(photosDir, "optimized");
   for (const f of files) {
@@ -81,6 +89,16 @@ async function main() {
     const baseName = path.basename(relName, path.extname(relName));
 
     if (type === "image") {
+      if (isFast) {
+        outputs.push({
+          type: "image",
+          src: "/" + path.posix.join("photos", relName),
+          thumb: "/" + path.posix.join("photos", relName),
+          width: null,
+          height: null,
+        });
+        continue;
+      }
       const image = sharp(f);
       const meta = await image.metadata();
 
@@ -121,6 +139,15 @@ async function main() {
         height: meta.height || null,
       });
     } else if (type === "video") {
+      if (isFast) {
+        outputs.push({
+          type: "video",
+          src: "/" + path.posix.join("photos", relName),
+          poster: "/placeholder.svg",
+          thumb: "/placeholder.svg",
+        });
+        continue;
+      }
       let poster = "/placeholder.svg";
       let thumb = "/placeholder.svg";
       if (ffmpegAvailable) {

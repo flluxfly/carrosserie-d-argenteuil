@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Automotive Professional Palette */
+    --background: 0 0% 100%;
+    --foreground: 220 100% 8%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 220 100% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 100% 8%;
+
+    /* Navy Blue Primary - Professional automotive */
+    --primary: 220 100% 20%;
+    --primary-foreground: 0 0% 98%;
+    --primary-light: 220 60% 35%;
+
+    /* Metallic Silver Secondary */
+    --secondary: 220 10% 85%;
+    --secondary-foreground: 220 100% 15%;
+    --secondary-dark: 220 15% 25%;
+
+    /* Subtle grays */
+    --muted: 220 10% 95%;
+    --muted-foreground: 220 8% 45%;
+
+    /* Red accent for highlights */
+    --accent: 0 85% 55%;
+    --accent-foreground: 0 0% 98%;
+    --accent-light: 0 70% 65%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 100% 20%;
+
+    --radius: 0.75rem;
+
+    /* Custom automotive gradients */
+    --gradient-metallic: linear-gradient(
+      135deg,
+      hsl(220, 15%, 85%) 0%,
+      hsl(220, 8%, 70%) 50%,
+      hsl(220, 15%, 85%) 100%
+    );
+    --gradient-navy: linear-gradient(
+      135deg,
+      hsl(220, 100%, 25%) 0%,
+      hsl(220, 100%, 15%) 100%
+    );
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(220, 100%, 8%) 0%,
+      hsl(220, 100%, 20%) 50%,
+      hsl(220, 60%, 35%) 100%
+    );
+
+    /* Professional shadows */
+    --shadow-elegant: 0 20px 40px -10px hsl(220 100% 20% / 0.15);
+    --shadow-card: 0 8px 25px -8px hsl(220 100% 20% / 0.12);
+
+    /* Smooth transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode automotive theme */
+    --background: 220 100% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 80% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 80% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 220 60% 35%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 15% 25%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 8% 65%;
+
+    --accent: 0 85% 55%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 220 60% 35%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Custom animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+}
+
+@layer utilities {
+  /* Ombres de texte pour lisibilité sur images */
+  .text-shadow {
+    text-shadow: 0 1px 1px hsl(0 0% 0% / 0.35), 0 2px 8px hsl(0 0% 0% / 0.35);
+  }
+  .text-shadow-strong {
+    text-shadow: 0 2px 2px hsl(0 0% 0% / 0.5), 0 4px 16px hsl(0 0% 0% / 0.5);
+  }
+}

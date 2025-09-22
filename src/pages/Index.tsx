@@ -1,5 +1,5 @@
 // Image de héros issue du dossier public
-const heroImage = "/photos/generated-image-d7c76cf8-938b-4576-b8bf-9597a4159f03.jpeg";
+const heroImage = "/photos/IMG_0734.jpg";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";

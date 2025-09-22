@@ -242,7 +242,7 @@ const Index = () => {
                   <Button variant="automotive" size="lg" asChild>
                     <Link to="/contact">
                       <Phone className="mr-2 h-5 w-5" />
-                      01 23 45 67 89
+                      06 63 90 48 46
                     </Link>
                   </Button>
                   <Button

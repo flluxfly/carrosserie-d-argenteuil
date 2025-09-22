@@ -19,19 +19,33 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message envoyé !",
-      description: "Nous vous recontacterons dans les plus brefs délais.",
-    });
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    });
+    try {
+      const form = new FormData();
+      form.append("name", formData.name);
+      form.append("email", formData.email);
+      form.append("phone", formData.phone);
+      form.append("service", formData.service);
+      form.append("message", formData.message);
+      form.append("website", ""); // honeypot
+
+      const res = await fetch("/api/contact.php", { method: "POST", body: form });
+      const data = await res.json().catch(() => ({ ok: false }));
+      if (!res.ok || !data.ok) throw new Error("send_error");
+
+      toast({
+        title: "Message envoyé !",
+        description: "Nous vous recontacterons dans les plus brefs délais.",
+      });
+      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    } catch (err) {
+      toast({
+        title: "Échec de l'envoi",
+        description: "Merci de réessayer ou d'appeler le 06 63 90 48 46.",
+        variant: "destructive",
+      });
+    }
   };
 
   const services = [
